@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
@@ -79,7 +80,7 @@ int exercicioC() {
   // obs: na transposta as colunas e linhas tão invertidas
   cout << "{\n";
   for (int i = 0; i < COLUNAS; ++i) {
-    cout << "{ ";
+    cout << "  { ";
     for (int j = 0; j < LINHAS; ++j) {
       cout << transposta[i][j] << ' ';
     }
@@ -93,8 +94,92 @@ int exercicioC() {
 // 4-) Criar uma matriz de ordem 5 e imprima: toda a matriz e depois os números
 // que se encontram em posições cuja a linha mais a coluna formam um número
 // ímpar.
+int exercicioD() {
+  const int ORDEM = 5;
+
+  // clang-format off
+  int matriz[ORDEM][ORDEM] = {
+    {50, 78, 68, 95, 45},
+    {14, 79, 48, 3, 61},
+    {12, 99, 54, 27, 94},
+    {22, 39, 35, 11, 84},
+    {9, 2, 33, 5, 23},
+  };
+  // clang-format on
+
+  queue<int> needed_nums;
+
+  // for (int i = 0; i < ORDEM; ++i) {
+  //   for (int j = 0; j < ORDEM; ++j) {
+  //     cout << "Digite o número na posição [" << i << "][" << j << "]: ";
+  //     cin >> matriz[i][j];
+  //   }
+  // }
+
+  for (int i = 0; i < ORDEM; ++i) {
+    cout << "{ ";
+    for (int j = 0; j < ORDEM; ++j) {
+      if ((i + j) % 2 == 1) {
+        needed_nums.push(matriz[i][j]);
+      }
+
+      cout << matriz[i][j] << ' ';
+    }
+    cout << "}\n";
+  }
+
+  // Exibir queue
+  cout << "Números em posição (i+j) % 2 == 1:\n";
+  cout << "{ ";
+  while (!needed_nums.empty()) {
+    cout << needed_nums.front() << ' ';
+    needed_nums.pop();
+  }
+  cout << "}\n";
+
+  return 0;
+}
 
 // 5-) Ler os elementos de uma matriz de ordem 6 e imprima o produto dos
 // elementos que estão abaixo da diagonal principal.
+int exercicioE() {
+  const int ORDEM = 6;
 
-int main() { return exercicioC(); }
+  // clang-format off
+  int matriz[ORDEM][ORDEM] = {
+    {42,36,96,6,51,53},                                                             
+    {65,91,99,68,63,5},                                                             
+    {22,95,13,47,24,22},                                                            
+    {37,3,12,25,28,13},                                                             
+    {95,2,38,27,97,55},                                                             
+    {99,37,6,11,42,59},                                                             
+  };
+  int produto = 1;
+  // clang-format on
+
+  for (int i = 0; i < ORDEM; ++i) {
+    for (int j = 0; j < ORDEM; ++j) {
+      cout << "Digite o número na posição [" << i << "][" << j << "]: ";
+      cin >> matriz[i][j];
+    }
+  }
+
+  // Calcular e exibir produto
+  int i;
+  for (int j = 0; j < ORDEM; ++j) {
+    i = j + 1;
+
+    // Evitar column overflow
+    if (i >= ORDEM) {
+      continue;
+    }
+
+    produto *= matriz[i][j];
+  }
+
+  cout << produto;
+
+  return 0;
+}
+
+int main() { return exercicioE(); }
