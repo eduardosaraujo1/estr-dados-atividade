@@ -17,68 +17,83 @@
 # Desafio: Utilize um while para manter o menu funcionando até o usuário escolher Sair.
 import sys
 
-def readInt():
-    return int(input())
+def readInt(msg=""):
+    while True:
+        try:
+            return int(input(msg))
+        except ValueError:
+            print("Digite um número válido e tente novamente.")
 
-def readFloat():
-    return float(input())
+def readFloat(msg=""):
+    while True:
+        try:
+            return float(input(msg))
+        except ValueError:
+            print("Digite um número válido e tente novamente.")
 
 def clear():
     # os.system("clear")
     sys.stdout.write("\033[H\033[2J")
     sys.stdout.flush()
 
-def pause(msg="Pressione qualquer tecla para continuar."):
-    print(msg,end="")
-    # Windows implementation
-    if sys.platform == "win32":
-        import msvcrt
-        # getwch handles unicode characters and returns a string
-        return msvcrt.getwch()
-        
-    # Linux and macOS implementation
-    else:
-        import termios
-        import tty
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            # Switch the terminal out of 'line-buffered' mode
-            tty.setcbreak(fd)
-            return sys.stdin.read(1)
-        finally:
-            # Always restore the original terminal settings
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+def pause(msg="[OK]"):
+    input(msg)
 
-def addProduct(products: list(str)):
+def addProduct(products: list[str]):
     products.append(input("Digite o nome do produto a adicionar: "))
-    pause()
+    print("Produto adicionado com sucesso.")
 
 def removeProduct(products: list(str)):
-    products.remove(input("Digite o nome do produto a remover: "))
-    pause()
+    max_index = len(products) - 1
+
+    if (max_index <= -1):
+        print("Não há nenhum produto para remover.")
+        return
+
+    choice = -1
+    while True:
+        try:
+            choice = readInt("Digite o índice do produto a remover (Ctrl+C para cancelar): ")
+            if choice < 0 or choice > max_index:
+                print("Produto inexistente. Tente novamente.")
+                continue
+            break
+        except KeyboardInterrupt:
+            print("\nOperação cancelada.")
+            return
+
+    products.pop(choice)
+    print("Produto removido com sucesso.")
 
 def showProducts(products: list(str)):
-    print('\n'.join(products))
-    pause()
+    if len(products) <= 0:
+        print("Nenhum produto cadastrado.")
+    else:
+        print('\n'.join([f"({i}) {p}" for i,p in enumerate(products)]))
 
 def searchProduct(products: list(str)):
     key = input("Digite o nome do produto: ")
-    print("Posição: ", products.index(key))
-    pass
+    try:
+        pos: int = products.index(key)
+        print("Posição: ", products.index(key))
+    except ValueError as e:
+        print("Produto não cadastrado.")
+
 
 def showUI() -> int:
-    MAX_NUM = 5;
+    MIN_NUM = 1
+    MAX_NUM = 5
 
     clear()
     print("""# ===== MENU =====
-    1 - Adicionar produto
-    2 - Listar produtos
-    3 - Pesquisar produto
-    4 - Remover produto
-    5 - Sair""")
+1 - Adicionar produto
+2 - Listar produtos
+3 - Pesquisar produto
+4 - Remover produto
+5 - Sair
+  > """, end="")
 
-    return min(MAX_NUM,max(1,readInt()))
+    return min(MAX_NUM, max(MIN_NUM, readInt()))
 
 def main():
     products: list(str) = []
@@ -87,20 +102,23 @@ def main():
         opt = showUI()
         match(opt):
             case 1:
+                clear()
                 addProduct(products)
-                break
+                pause()
             case 2:
+                clear()
                 showProducts(products)
-                break
+                pause()
             case 3:
+                clear()
                 searchProduct(products)
-                break
+                pause()
             case 4:
+                clear()
                 removeProduct(products)
-                break
+                pause()
             case 5:
-                exit()
-                break
+                sys.exit()
 
 if __name__ == '__main__':
     main()
