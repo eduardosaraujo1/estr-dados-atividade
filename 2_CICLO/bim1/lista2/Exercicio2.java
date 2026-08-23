@@ -1,25 +1,29 @@
-package org.example;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class App {
+class Main {
 
     public static void main(String[] args) {
         final Scanner s = new Scanner(System.in);
-        ArrayList<String> arr = new ArrayList<>(
-            List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L")
-        );
-
-        // for (int i = 0; i < 10; ++i) {
-        //     System.out.printf("Digite o %dº nome: ", i + 1);
-        //     arr.add(s.nextLine());
-        // }
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("Ana");
+        arr.add("Bruno");
+        arr.add("Camila");
+        arr.add("Diego");
+        arr.add("Eduardo");
+        arr.add("Fernanda");
+        arr.add("Gabriel");
+        arr.add("Heloísa");
+        arr.add("Isabela");
+        arr.add("João");
+        arr.add("Lucas");
+        arr.add("Larissa");
 
         System.out.print("Digite o nome para busca: ");
         System.out.println(
             arr.contains(s.nextLine()) ? "Aluno encontrado!" : "Não encontrado"
         );
+
         s.close();
     }
 }

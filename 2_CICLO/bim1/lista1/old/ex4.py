@@ -1,5 +1,6 @@
 import math
 
+
 def readInt(msg: str = ""):
     while True:
         try:
@@ -7,8 +8,9 @@ def readInt(msg: str = ""):
         except ValueError:
             print("Digite um número válido e tente novamente.")
 
+
 def main():
-    nums = []
+    nums: list[int] = []
     qtdePar = 0
     qtdeImpar = 0
     maior = -math.inf
@@ -18,7 +20,7 @@ def main():
     for i in range(10):
         n = 0
         while True:
-            n = readInt(f"Digite o {i+1}º número: ")
+            n = readInt(f"Digite o {i + 1}º número: ")
             if n in nums:
                 print("Não é permitido números repetidos.")
                 continue
@@ -43,12 +45,13 @@ def main():
     print(f"Maior: {maior}")
     print(f"Menor: {menor}")
     print(f"Soma: {soma}")
-    print(f"Média: {soma/count}")
-    print(f"Posição do número pesquisado: ",end="")
+    print(f"Média: {soma / count}")
+    print("Posição do número pesquisado: ", end="")
     if search in nums:
         print(nums.index(search))
     else:
         print("Não encontrado")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

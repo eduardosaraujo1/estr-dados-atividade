@@ -1,5 +1,4 @@
 import sys
-from typing import override
 
 
 def readInt(msg: str = ""):
@@ -43,7 +42,6 @@ class Aluno:
     def nota(self) -> float:
         return self.__nota
 
-    @override
     def __str__(self) -> str:
         return f"Nome: {self.nome()} | Idade: {self.idade()} | Nota: {self.nota():.2f}"
 
@@ -111,7 +109,8 @@ def removerAluno(aluno: list[Aluno]):
             continue
         break
 
-    _ = aluno.pop(index)
+    removido = aluno.pop(index)
+    print(f"Aluno '{removido.nome()}' removido com sucesso.")
 
 
 def mostrarMedia(aluno: list[Aluno]):

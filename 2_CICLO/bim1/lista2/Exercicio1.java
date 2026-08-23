@@ -1,10 +1,7 @@
-
-package org.example;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class App {
+class Main {
 
     public static void main(String[] args) {
         final Scanner s = new Scanner(System.in);
@@ -15,7 +12,12 @@ public class App {
             arr.add(s.nextLine());
         }
 
-        System.out.println(arr);
+        System.out.println("Alunos cadastrados:");
+
+        for (String aluno : arr) {
+            System.out.println(aluno);
+        }
+
         s.close();
     }
 }
