@@ -25,9 +25,9 @@ def readInt(msg: str = ""):
             print("Digite um número válido e tente novamente.")
 
 
-def obterNodeFinal(root: Node):
-    atual = root
-    proximo = root.next()
+def getListTail(head: Node):
+    atual = head
+    proximo = head.next()
 
     while proximo is not None:
         atual = proximo
@@ -36,14 +36,9 @@ def obterNodeFinal(root: Node):
     return atual
 
 
-def addFinal(node: Node, root: Node | None) -> Node:
-    if root is None:
-        return node
-
-    final = obterNodeFinal(root)
-    final.setNext(node)
-
-    return root
+def inserirFinal(node: Node, listHead: Node) -> None:
+    tail = getListTail(listHead)
+    tail.setNext(node)
 
 
 def exibirCadeia(node: Node | None):
@@ -60,7 +55,10 @@ def main():
 
     for i in range(N):
         numero = readInt(f"Digite o {i + 1}º número: ")
-        root = addFinal(Node(numero), root)
+        if root is None:
+            root = Node(numero)
+        else:
+            inserirFinal(Node(numero), root)
 
     exibirCadeia(root)
 

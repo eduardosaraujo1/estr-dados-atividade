@@ -1,3 +1,4 @@
+# Adicionado pelo meu linter: resolve os type-hints após o processamento do código
 from __future__ import annotations
 
 
