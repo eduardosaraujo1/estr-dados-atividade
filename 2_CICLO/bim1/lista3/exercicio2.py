@@ -28,10 +28,9 @@ def addInicio(node: Node, root: Node | None) -> Node:
     if root is None:
         return node
 
-    while root is not None and root.next() is not None:
-        if root.next() is not None:
-            break
-        root = root.next()
+    node.setNext(root)
+
+    return node
 
 
 def exibirCadeia(node: Node | None):

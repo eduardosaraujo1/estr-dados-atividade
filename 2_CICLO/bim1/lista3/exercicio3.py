@@ -25,21 +25,29 @@ def readInt(msg: str = ""):
             print("Digite um número válido e tente novamente.")
 
 
+def obterNodeFinal(root: Node):
+    atual = root
+    proximo = root.next()
+
+    while proximo is not None:
+        atual = proximo
+        proximo = atual.next()
+
+    return atual
+
+
 def addFinal(node: Node, root: Node | None) -> Node:
-    # NOT IMPLEMENTED
     if root is None:
         return node
 
-    finalNode = root
-
-    # while finalNode.next() is not None:
-    #     finalNode = finalNode.next()
-    # finalNode.setNext(node)
+    final = obterNodeFinal(root)
+    final.setNext(node)
 
     return root
 
 
 def exibirCadeia(node: Node | None):
+    # exemplo de saida: 1 → 2 → 3 → NULL
     while node is not None:
         print(node.value(), "→", end=" ")
         node = node.next()
