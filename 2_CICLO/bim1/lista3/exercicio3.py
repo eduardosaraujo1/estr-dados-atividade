@@ -25,6 +25,14 @@ def readInt(msg: str = ""):
             print("Digite um número válido e tente novamente.")
 
 
+def exibirCadeia(node: Node | None):
+    # exemplo de saida: 1 → 2 → 3 → NULL
+    while node is not None:
+        print(node.value(), "→", end=" ")
+        node = node.next()
+    print("NULL")
+
+
 def getListTail(head: Node):
     atual = head
     proximo = head.next()
@@ -39,14 +47,6 @@ def getListTail(head: Node):
 def inserirFinal(node: Node, listHead: Node) -> None:
     tail = getListTail(listHead)
     tail.setNext(node)
-
-
-def exibirCadeia(node: Node | None):
-    # exemplo de saida: 1 → 2 → 3 → NULL
-    while node is not None:
-        print(node.value(), "→", end=" ")
-        node = node.next()
-    print("NULL")
 
 
 def main():

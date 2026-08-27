@@ -60,7 +60,7 @@ def generateLinkedList(arr: list[int]) -> Node | None:
 
 # Efetua busca linear na lista encadeada
 # Retorna a posição do elemento encontrado (zero incluso), ou -1 se não for encontrado.
-def busca(search: int, listHead: Node):
+def busca(search: int, listHead: Node) -> int:
     atual: Node | None = listHead
     pos = 0
 
