@@ -1,21 +1,3 @@
-"""
-Crie uma lista encadeada contendo:
-10 → 25 → 30 → 45 → 60
-Solicite ao usuário um número para pesquisar.
-
-Exemplo:
-Digite o número: 45
-
-Número encontrado!
-Caso não exista:
-Digite o número: 100
-
-Número não encontrado!
-Desafio: crie uma função:
-buscar()
-que percorra a lista utilizando um while.
-"""
-
 # Adicionado pelo meu linter: resolve os type-hints após o processamento do código
 from __future__ import annotations
 
@@ -86,7 +68,7 @@ def main():
     if resultado < 0:
         print("Número não encontrado!")
     else:
-        print(f"Número encontrado (nó {resultado + 1})!")
+        print(f"Número encontrado no índice {resultado}!")
 
 
 if __name__ == "__main__":
